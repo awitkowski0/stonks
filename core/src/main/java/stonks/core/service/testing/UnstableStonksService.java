@@ -21,6 +21,7 @@
  */
 package stonks.core.service.testing;
 
+import java.security.SecureRandom;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -58,7 +59,7 @@ public class UnstableStonksService implements StonksService {
 	public StonksService getUnderlying() { return underlying; }
 
 	private <T> CompletableFuture<T> wrapStage(CompletionStage<T> stage) {
-		var rng = new Random();
+		var rng = new SecureRandom();
 		var shouldFail = rng.nextDouble() < failRate;
 		var waitMs = rng.nextLong(maxLag);
 
